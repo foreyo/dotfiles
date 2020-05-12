@@ -1,7 +1,7 @@
 install: install-zsh install-vim install-neovim install-tmux
 
 install-neovim:
-	rm -rf ~/.config nvim
+	rm -rf ~/.config/nvim
 	ln -s `pwd`/nvim ~/.config/nvim
 	ifeq (, $(shell which nvim))
 		$(error "No lzop in $(PATH), consider doing apt-get install neovim")
