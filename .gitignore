@@ -19,3 +19,4 @@ tags
 [._]*.un~
 # Plugin repositories
 nvim/plugged/
+nvim/autoload/
