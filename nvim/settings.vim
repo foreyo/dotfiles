@@ -24,3 +24,6 @@ endif
 
 colorscheme gruvbox
 set background=dark                     " Setting dark mode
+
+" Remove numbers in terminal
+au TermOpen * setlocal nonumber norelativenumber
