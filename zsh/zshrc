@@ -118,7 +118,18 @@ export SIMPLE_SETTINGS=settings.dev
 export PYENV_ROOT="$HOME/.pyenv"
 
 # Start SSH agent
-eval $(ssh-agent -s)
+# eval $(ssh-agent -s)
+if [ -z "$SSH_AUTH_SOCK" ]
+then
+   # Check for a currently running instance of the agent
+   RUNNING_AGENT="`ps -ax | grep 'ssh-agent -s' | grep -v grep | wc -l | tr -d '[:space:]'`"
+   if [ "$RUNNING_AGENT" = "0" ]
+   then
+        # Launch a new instance of the agent
+        ssh-agent -s &> ~/.ssh/ssh-agent
+   fi
+   eval `cat ~/.ssh/ssh-agent`
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
