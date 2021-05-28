@@ -78,7 +78,7 @@ DISABLE_MAGIC_FUNCTIONS=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pyenv python pip tmux ubuntu)
+plugins=(git python pip tmux ubuntu)
 #plugins=(git ubuntu)
 
 source $ZSH/oh-my-zsh.sh
@@ -111,11 +111,13 @@ source $ZSH/oh-my-zsh.sh
 
 alias v=nvim
 export PATH=$PATH:~/.bin
+export PATH="$PATH:$HOME/.local/bin"
 
 # Python simple settings
 export SIMPLE_SETTINGS=settings.dev
 
 export PYENV_ROOT="$HOME/.pyenv"
+eval "$(pyenv init -)"
 
 # Start SSH agent
 # eval $(ssh-agent -s)
@@ -154,3 +156,14 @@ typeset -g POWERLEVEL9K_PYENV_CONTENT_EXPANSION='${(M)P9K_CONTENT:#*.*}'
 typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION='${${(M)P9K_CONTENT:#*.*}:+${P9K_VISUAL_IDENTIFIER// }}'
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+
+export FFMPEG_ROOT=$HOME/ffmpeg
+export CGO_LDFLAGS="-L$FFMPEG_ROOT/lib/ -lavcodec -lavformat -lavutil -lswscale -lswresample -lavdevice -lavfilter"
+export CGO_CFLAGS="-I$FFMPEG_ROOT/include"
+export LD_LIBRARY_PATH=$FFMPEG_ROOT/lib
+
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+
+#export DOCKER_HOST=tcp://localhost:2375
